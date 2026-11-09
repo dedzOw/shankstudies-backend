@@ -1,13 +1,14 @@
 const express = require("express");
 const cors = require("cors");
-const multer = require("multer");
+
 const app = express();
-app.use(express.static("public"));
+
+app.use(cors());
 app.use(express.json());
+app.use(express.static("public"));
 
-
-[
-{
+const studies = [
+    {
         "_id": 1,
         "unit": "UNIT 1",
         "title": "Native Americans, Early Encounters & Colonial Development",
@@ -57,13 +58,14 @@ app.use(express.json());
         "review_link": "units.html#unit-five",
         "review_text": "Review Unit 5 topics"
     }
-]
+];
 
-app.get("/api/studies", (req,res)=>{});
+app.get("/api/studies", (req, res) => {
+    res.json(studies);
+});
 
-const upload = multer({storage: sotrage});
+const port = process.env.PORT || 3001;
 
-//listen for incoming requests
-app.listen(3001, ()=> {
-    console.log("Server is up and running");
+app.listen(port, "0.0.0.0", () => {
+    console.log(`Server is running on port ${port}`);
 });
